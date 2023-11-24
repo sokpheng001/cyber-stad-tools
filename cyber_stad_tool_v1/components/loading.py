@@ -1,13 +1,13 @@
 import time
 import sys
 import psutil
-from colorama import Fore, init
+from colorama import Fore, init, Style
 
 # Initialize colorama
 init(autoreset=True)
 
 def get_cpu_usage():
-    return psutil.cpu_percent(interval=0.1)
+    return psutil.cpu_percent(interval=0.05)
 
 def loading_animation():
     opening_text = "Opening"
@@ -26,6 +26,6 @@ def loading_animation():
 
     # sys.stdout.write("\r" + Fore.GREEN + "[+] Started tool: [" + "█" * width + "] 100%  \n")
     sys.stdout.write("\r" + " " * (len(opening_text) + 3 + width + 20) + "\n")
-    print("[+] Tool Started!,:) !");
+    print("[" + Fore.GREEN + "*" + Style.RESET_ALL +"] "+ "Tool Started!");
     print("...................................\n");
 

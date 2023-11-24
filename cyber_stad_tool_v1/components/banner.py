@@ -112,4 +112,5 @@ def start_banner(banner_text="CBYER-STAD"):
     print();
     print();
     print(banner)
-    loading.loading_animation();
+    # loading 
+    # loading.loading_animation();
