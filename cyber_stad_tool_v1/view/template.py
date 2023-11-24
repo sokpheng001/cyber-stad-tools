@@ -1,17 +1,13 @@
 import logging
 from colorama import Fore, Style
-from abc import ABC, abstractmethod
 from components import banner,loading
 from weapons import reconnaisance
+from view import option
 import sys
 
-class Option(ABC):
-    def reconnaissance_option(self):
-        print("This is reconnaisance option");
-    def exploit_option(self):
-        print("This is exploit option")
 
-class Template(Option):
+
+class Template(option.Option):
     #list of main options
     __main_options = [1,2]
     # list of every option
