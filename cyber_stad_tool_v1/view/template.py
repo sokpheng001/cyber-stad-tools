@@ -19,7 +19,7 @@ class Template(option.Option):
         print("[" + Fore.GREEN + "*" + Style.RESET_ALL +"] " +"Choose an option to do Pentesting on the web application.")
         print("..........................................\n")
         print("1-> Start Reconnaissance")
-        print("2-> Start Expliots")
+        print("2-> Start Exploits")
         # print("2-> Start Expliots")
         print(Fore.RED + "(99 or Ctr + C or Exit) -> " + Style.RESET_ALL +  "To Exit ")
         print("---");
