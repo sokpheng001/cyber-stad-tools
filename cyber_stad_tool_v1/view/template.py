@@ -6,7 +6,6 @@ from view import option
 import sys
 
 
-
 class Template(option.Option):
     #list of main options
     __main_options = [1,2]
