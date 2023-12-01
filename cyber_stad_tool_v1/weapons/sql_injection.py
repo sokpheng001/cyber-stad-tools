@@ -98,4 +98,6 @@ def attack_sql_injection(url):
         print("[bold blue]---------| END OF SCAN |---------[/bold blue]")
 
 
-attack_sql_injection("https://myshop.cstad.shop/")
+def start_sql_injection():
+    url = str(input("Enter url: "));
+    attack_sql_injection("https://myshop.cstad.shop/");
