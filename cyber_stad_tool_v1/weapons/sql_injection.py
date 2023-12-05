@@ -19,7 +19,7 @@ def attack_sql_injection(url):
     }
     login_url = url + 'rest/user/login'
     search_product_url = url + 'rest/products/search?q='
-    new_url = " "
+    new_url = " ";
     selected_payload = []
 
     print("[bold blue]-----------| SQL Injection  |-----------[/bold blue]")
@@ -99,5 +99,5 @@ def attack_sql_injection(url):
 
 
 def start_sql_injection():
-    url = str(input("Enter url: "));
+    target = str(input("Target url: "));
     attack_sql_injection("https://myshop.cstad.shop/");
