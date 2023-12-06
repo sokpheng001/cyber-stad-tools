@@ -55,7 +55,7 @@ class Template(exploit_option.Exploit, reconnaissance_option.Reconnaissance):
             exit_message.exit_tool_message()
             sys.exit(0);
     def display_options(self):
-        print("[" + Fore.GREEN + "*" + Style.RESET_ALL +"] " +"Choose an option to do Pentesting on the web application.")
+        print("\n[" + Fore.GREEN + "*" + Style.RESET_ALL +"] " +"Choose an option to do Pentesting on the web application.")
         print("..........................................\n")
         print("1-> Start Reconnaissance")
         print("2-> Start Social Engineering")
@@ -98,4 +98,5 @@ def cyber_stad():
     started_tool_date();
     banner.start_banner();
     view1 = Template();
-    view1.display_options();
+    while True:
+        view1.display_options();
