@@ -1,4 +1,4 @@
-import logging
+import subprocess
 from colorama import Fore, Style
 from components import banner,loading
 from weapons import reconnaisance
@@ -8,14 +8,17 @@ from components import clear_screen_and_provide_with_banner, clear_screen,exit_m
 from datetime import datetime
 from view.reconnaissance_options import reconnaissance_option;
 
+shell_script = """
 
+# Add more commands as needed
+"""
 
 
 def started_tool_date()-> None:
 # Get the current date and time
     current_datetime = datetime.now()
     # Format the date and time as a string with the month in English
-    formatted_datetime = current_datetime.strftime("%Y-%B-%d Time: %H:%M:%S")
+    formatted_datetime = current_datetime.strftime("%Y-%B-%d Time: %H:%M:%S %p")
     
     print("[" + Fore.GREEN + "***" + Style.RESET_ALL +"] "  + "Started Tool:", formatted_datetime);
     print("[" + Fore.GREEN + "***" + Style.RESET_ALL +"] "  + "HAPPY HACKING")
@@ -40,7 +43,7 @@ class Template(exploit_option.Exploit, reconnaissance_option.Reconnaissance):
             #insert option
             self.__choice = str(input("[+] Insert an option: "));
             # check is with clear keyword
-            if self.__choice.lower() == "exit":
+            if self.__choice.lower() == "exit" :
                 exit_message.exit_tool_message();
                 sys.exit(0);
             #convert option value to integer
@@ -60,7 +63,11 @@ class Template(exploit_option.Exploit, reconnaissance_option.Reconnaissance):
         print("1-> Start Reconnaissance")
         print("2-> Start Social Engineering")
         print("3-> Start Exploits")
+        print("8-> Generate reports")
         # print("2-> Start Expliots")
+        print("---");
+        print(Fore.GREEN + "(To restart or reload tools) -> " + Style.RESET_ALL +  "Use reload/restart/r commands ")
+        print(Fore.GREEN + "(To clear) -> " + Style.RESET_ALL +  "Use \'clear\' command ")
         print(Fore.RED + "(99 or Ctr + C or Exit) -> " + Style.RESET_ALL +  "To Exit ")
         print("---");
         # start choosing option
@@ -71,23 +78,37 @@ class Template(exploit_option.Exploit, reconnaissance_option.Reconnaissance):
     #This method can be mutable
     # //////////////////////////////////////////////////////////////////////////
     def start_options(self, opt):
-        if opt =="1":
-            self.start_reconnaissance();
-        elif opt == "2":
-            print("Social engineering")
-        elif opt =="3":
-            loading.loading_animation();
-            clear_screen_and_provide_with_banner.start();
-            self.exploit_option();
-        elif opt.lower() == "clear":
-            clear_screen_and_provide_with_banner.start();
-            self.display_options();
-        elif opt == "99" :
-            exit_message.exit_tool_message();
+        try:
+            if opt =="1":
+                self.start_reconnaissance();
+            elif opt == "2":
+                print("Social engineering")
+            elif opt =="3":
+                loading.loading_animation();
+                clear_screen_and_provide_with_banner.start();
+                self.exploit_option();
+            elif opt.lower() == "reload" or opt.lower() == "restart" or opt.lower() == "r":
+                # reload our tools
+                # Use subprocess to run the shell script
+                print("[+] Restarting tools...");
+                subprocess.run(['python','main.py'])
+                # 
+            elif opt.lower() == "clear":
+                clear_screen_and_provide_with_banner.start();
+                self.display_options();
+            elif opt.lower() == "cleear" or opt.lower() == "clea":
+                print(Fore.RED + "=> Invalid command, it looks like you want to use \'clear\' command :) .!!!" + Style.RESET_ALL);
+                self.choose_option();         
+            elif opt == "99" :
+                exit_message.exit_tool_message();
+                sys.exit(0);
+            else:
+                invalid_input_option_message.invalid_input_option_message();
+                self.choose_option();      
+        except KeyboardInterrupt as error:
+            exit_message.exit_tool_message()
             sys.exit(0);
-        else:
-            invalid_input_option_message.invalid_input_option_message();
-            self.choose_option();         
+               
     #//////////////////////////////////////////////////////////////// 
 
         
