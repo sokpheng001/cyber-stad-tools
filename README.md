@@ -9,8 +9,8 @@ This tool was implemented by Cybersecurity students of CSTAD in 2023 and to do t
 ## Features
 
 - **Feature 1:** Reconnaissance: This option allows us to gather information of our target website.
-- **Feature 2:** Describe the second key feature.
-- **Feature 3:** ...
+- **Feature 2:** Social Engineering: This option will be done in email sending.
+- **Feature 3:** Exploiation: This option will start to attack the target like SQL Injection, Cross-site Scripting, Brute Force attacks.
 
 ## Installation
 
