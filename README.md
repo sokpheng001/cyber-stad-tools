@@ -22,3 +22,5 @@ git clone https://github.com/sokpheng001/cyber-stad-tools.git
 cd cyber-stad-tools
 pip install .
 pip install -r requirements.txt
+---
+To run project: ./cyber_stad.sh
