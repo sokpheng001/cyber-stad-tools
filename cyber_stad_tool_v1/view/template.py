@@ -10,9 +10,6 @@ from view.reconnaissance_options import reconnaissance_option;
 
 
 
-    
-
-
 
 def started_tool_date()-> None:
 # Get the current date and time
