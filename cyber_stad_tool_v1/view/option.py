@@ -5,7 +5,7 @@ from abc import ABC
 from colorama import Fore, Style
 from termcolor import colored
 from components import loading,banner
-from information_gethering import website_information, mail_server, port_scanning, security_header, whois_scanning
+from weapons.information_gethering import website_information, mail_server, port_scanning, security_header, whois_scanning
 from view import template
 class Option(ABC):
     @staticmethod
@@ -96,7 +96,7 @@ class Option(ABC):
             print("=> Exited tool. :)")
             template.cyber_stad();
         else:
-            print(Fore.RED + "=> Invalid option range, options are number 1 and number 2" + Style.RESET_ALL)
+            print(Fore.RED + "=> Invalid option range, options are number 1 and number 5" + Style.RESET_ALL)
             input("Press key to continues...")
             self.reconnaissance_option()
             opt = int(input("Choose an option (1-5, 99 to back): "))
