@@ -9,7 +9,6 @@ def create_banner(text, font='standard'):
     # Use the Figlet object to convert the text to ASCII art
     banner = fig.renderText(text)
     color = colored(banner, "green");
-    
     return color
 
 
@@ -72,7 +71,7 @@ fonts_list = [
 ]
 
 
-def start_banner(banner_text="CBYER-STAD"):
+def start_banner(banner_text="CYBER-STAD"):
     # for i in fonts_list:
     #         # Your text and font choice
     #     banner_text = "CYBER-STAD"
@@ -107,10 +106,14 @@ def start_banner(banner_text="CBYER-STAD"):
     # for font in fonts:
     #     print(font)
     # Print the banner
-    print();
-    print();
-    print();
-    print();
+    print("\n\n\n\n");
     print(banner)
+    print("\t\t\t================================================================================");
+    print("\t\t\t . This tool was implemented by the CSTAD cybersecurity student™ in 2023");
+    print("\t\t\t . Credit to CSTAD");
+    print("\t\t\t . CYBER-STAD Group™");
+    print("\t\t\t . Github: https://github.com/sokpheng001/cyber-stad-tools.git")
+    print("\t\t\t================================================================================");
+    print()
     # loading 
     # loading.loading_animation();

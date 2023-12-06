@@ -7,7 +7,7 @@ from colorama import Fore, init, Style
 init(autoreset=True)
 
 def get_cpu_usage():
-    return psutil.cpu_percent(interval=0.05)
+    return psutil.cpu_percent(interval=0.01)
 
 def loading_animation():
     opening_text = "Opening"

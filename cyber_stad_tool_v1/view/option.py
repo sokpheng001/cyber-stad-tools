@@ -7,6 +7,7 @@ from termcolor import colored
 from components import loading,banner
 from weapons.information_gethering import website_information, mail_server, port_scanning, security_header, whois_scanning
 from view import template
+
 class Option(ABC):
     @staticmethod
     def item(number):

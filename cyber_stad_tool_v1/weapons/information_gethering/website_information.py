@@ -69,3 +69,10 @@ def get_ip_info(target):
     except Exception as e:
         print(f"Error: {e}")
 
+
+def start_ip_scanning():
+    try:
+        ip = str(input("Target IP address/domain name: "));
+        get_ip_info(ip);
+    except Exception as e:
+        print("Invalid :()");

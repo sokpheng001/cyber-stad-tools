@@ -19,5 +19,6 @@ Ensure you have Python installed. Clone the repository and install dependencies 
 
 ```bash
 git clone https://github.com/sokpheng001/cyber-stad-tools.git
-cd your_pentesting_tool
+cd cyber-stad-tools
+pip install .
 pip install -r requirements.txt
