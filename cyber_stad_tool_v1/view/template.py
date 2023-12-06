@@ -87,16 +87,22 @@ class Template(exploit_option.Exploit, reconnaissance_option.Reconnaissance):
                 loading.loading_animation();
                 clear_screen_and_provide_with_banner.start();
                 self.exploit_option();
-            elif opt.lower() == "reload" or opt.lower() == "restart" or opt.lower() == "r":
+            elif opt =="8":
+                print("Generate reports");
+            elif opt.lower().replace(" ", "") == "reload" or opt.lower().replace(" ", "") == "restart" or opt.lower().replace(" ", "") == "r":
                 # reload our tools
                 # Use subprocess to run the shell script
                 print("[+] Restarting tools...");
                 subprocess.run(['python','main.py'])
                 # 
-            elif opt.lower() == "clear":
+            elif opt.lower().replace(" ", "") == "banner":
                 clear_screen_and_provide_with_banner.start();
                 self.display_options();
-            elif opt.lower() == "cleear" or opt.lower() == "clea":
+                
+            elif opt.lower().replace(" ","") == "clear":
+                clear_screen.clear_screen();
+                self.display_options();
+            elif opt.lower().replace(" ","") == "cleear" or opt.lower() == "clea":
                 print(Fore.RED + "=> Invalid command, it looks like you want to use \'clear\' command :) .!!!" + Style.RESET_ALL);
                 self.choose_option();         
             elif opt == "99" :
