@@ -1,0 +1,4 @@
+
+
+class GenerateReport:
+    pass
