@@ -52,7 +52,7 @@ class Template(option.Option):
     def start_options(self, opt):
         if opt ==1:
             super().reconnaissance_option()
-            opt = int(input("Choose an option (1-2, 99 to exit): "))
+            opt = int(input("Choose an option (1-5, 99 to back): "))
             super().exploit_option(opt)
         elif opt ==2:
             loading.loading_animation();
