@@ -1,12 +1,13 @@
 import subprocess
 from colorama import Fore, Style
-from components import banner,loading
+from components import banner, loading
 from weapons import reconnaisance
 from view.exploit_options import exploit_option
 import sys
-from components import clear_screen_and_provide_with_banner, clear_screen,exit_message, invalid_input_option_message;
+from components import clear_screen_and_provide_with_banner, clear_screen, exit_message, invalid_input_option_message;
 from datetime import datetime
 from view.reconnaissance_options import reconnaissance_option;
+from view.reconnaissance_options import option
 
 shell_script = """
 
@@ -32,21 +33,22 @@ class Template(exploit_option.Exploit, reconnaissance_option.Reconnaissance):
     #list of main options
     __main_options = [1,2]
     # list of every option
-    __options = [1,2,3,4,5,6,7]
+    __options = [1, 2, 3, 4, 5, 6, 7]
     # choice
     __choice = 0
-    #display body
-    # add more options here ////////////////////////////////  
-        # implementation of logic for choosing options
+
+    # display body
+    # add more options here ////////////////////////////////
+    # implementation of logic for choosing options
     def choose_option(self):
         try:
-            #insert option
+            # insert option
             self.__choice = str(input("[+] Insert an option: "));
             # check is with clear keyword
             if self.__choice.lower() == "exit" :
                 exit_message.exit_tool_message();
                 sys.exit(0);
-            #convert option value to integer
+            # convert option value to integer
             # self.__choice = int(self.__choice);
             # if self.__choice is an integer, then call the following method
             self.start_options(self.__choice);
@@ -57,6 +59,7 @@ class Template(exploit_option.Exploit, reconnaissance_option.Reconnaissance):
         except KeyboardInterrupt:
             exit_message.exit_tool_message()
             sys.exit(0);
+
     def display_options(self):
         print("\n[" + Fore.GREEN + "*" + Style.RESET_ALL +"] " +"Choose an option to do Pentesting on the web application.")
         print("..........................................\n")
@@ -72,10 +75,11 @@ class Template(exploit_option.Exploit, reconnaissance_option.Reconnaissance):
         print("---");
         # start choosing option
         self.choose_option();
-    # add more options here ////////////////////////////////  
-    #////////////////////////////////////////////////////////////////////////////////////////////////
 
-    #This method can be mutable
+    # add more options here ////////////////////////////////
+    # ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    # This method can be mutable
     # //////////////////////////////////////////////////////////////////////////
     def start_options(self, opt):
         try:
@@ -85,7 +89,7 @@ class Template(exploit_option.Exploit, reconnaissance_option.Reconnaissance):
                 print("Social engineering")
             elif opt =="3":
                 loading.loading_animation();
-                clear_screen_and_provide_with_banner.start();
+                clear_screen_and_provide_with_banner.cstad_banner_();
                 self.exploit_option();
             elif opt =="8":
                 print("Generate reports");
@@ -119,7 +123,7 @@ class Template(exploit_option.Exploit, reconnaissance_option.Reconnaissance):
 
         
 
-# start tool options 
+# start tool options
 def cyber_stad():
     clear_screen.clear_screen();
     started_tool_date();

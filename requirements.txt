@@ -115,3 +115,5 @@ yarl                      == 1.9.2
 youtube-dl                == 2021.12.17
 zope.event                == 5.0
 zope.interface            == 6.1
+python-nmap               == 0.7.1
+python-whois              == 0.8.0
