@@ -1,6 +1,15 @@
 from pyfiglet import Figlet
 from termcolor import colored
 from components import loading
+import random
+
+color_  = ['grey',
+'red',
+'green',
+'yellow',
+'blue',
+'magenta',
+'cyan']
 
 def create_banner(text, font='standard'):
     # Create a Figlet object
@@ -8,7 +17,7 @@ def create_banner(text, font='standard'):
     
     # Use the Figlet object to convert the text to ASCII art
     banner = fig.renderText(text)
-    color = colored(banner, "green");
+    color = colored(banner,color_[random.randint(0,len(color_)-1)] );
     return color
 
 
@@ -71,6 +80,8 @@ fonts_list = [
 ]
 
 
+
+
 def start_banner(banner_text="CYBER-STAD"):
     # for i in fonts_list:
     #         # Your text and font choice
@@ -93,10 +104,13 @@ def start_banner(banner_text="CYBER-STAD"):
     #     print("Font name: {}".format(i))
     banner_text = banner_text
     # banner_font = "banner3-D"
-    banner_font = "dos_rebel";
 
+    banner_font = "dos_rebel";
+    
+    
     # Create the banner
     banner = create_banner(banner_text, banner_font)
+
     # fig = Figlet()
 
     # # Get the list of available fonts
