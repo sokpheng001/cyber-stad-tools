@@ -49,7 +49,7 @@ class SQLInjection:
         elif page_choice == "3":   
             print("[bold yellow]You've selected the HTTP Headers option.[/bold yellow]");
             print("=> This option is under development.. :) )")
-        elif page_choice.lower().replace(" ","") == "clear":
+        elif page_choice.lower().replace(" ","") == "clear" or page_choice.lower().replace(" ","") == "cls":
             clear_screen.clear_screen();
             self.choose_options(url);
         else:
@@ -64,7 +64,7 @@ class SQLInjection:
             
             level = str(input("Choose any payload option from 1 to 3: "))
             
-            if level == "0":
+            if level == "0" or level.lower().replace(" ", "")=="back" or level.lower().replace(" ", "")=="b":
                 clear_screen_and_provide_with_banner.start();
                 self.choose_options(url);
             elif level == "1":

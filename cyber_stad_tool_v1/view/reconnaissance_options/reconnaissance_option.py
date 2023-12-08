@@ -8,6 +8,6 @@ class Reconnaissance(ABC):
     def reconnsiassance_more_options():
         pass
     def start_reconnaissance(self):
-        one_second_loading.loading_animation(1);
+        one_second_loading.loading_animation_for_reconnaissance_feature(1, content="Opening reconnaissance");
         option1 = option.Option();
-        option1.choose_option();
+        option1.choose_option("I want banner");
