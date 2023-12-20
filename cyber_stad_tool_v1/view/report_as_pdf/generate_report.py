@@ -14,9 +14,9 @@ class Report(ABC):
         self.data = 'abc'  # Initialize to False or true to check conditions (static)
         self.output_path = Path(__file__).parent / "output" 
         self.output_path.mkdir(parents=True, exist_ok=True)  
-
+ 
     def generate_report(self):
-        file_name = "pentest_report.pdf" 
+        file_name = "report.pdf" 
         if self.data == '': #false
             print("No data available to generate a report, start exploit first.")
         else:
@@ -502,7 +502,7 @@ class Report(ABC):
 
                 
             pdf.output(str(self.output_path / file_name), "F")
-            print(f"File Pentest Report '{file_name}' generated successfully.")
+            print(f"----> File Pentest Report ---- '{file_name}' ----- generated successfully.")
 
 # Call func
 report = Report()
