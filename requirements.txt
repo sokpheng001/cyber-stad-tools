@@ -97,12 +97,12 @@ sqlparse                  == 0.4.4
 Sublist3r                 == 1.0
 termcolor                 == 2.3.0
 tiktoken                  == 0.5.1
-tldextract                == 3.6.0
-Tool-V1                   == 1.0
-tqdm                      == 4.66.1
-trio                      == 0.22.2
-trio-websocket            == 0.11.1
-tzdata                    == 2023.3
+#tldextract                == 3.6.0
+# Tool-V1                   == 1.0
+# tqdm                      == 4.66.1
+# trio                      == 0.22.2
+# trio-websocket            == 0.11.1
+# tzdata                    == 2023.3
 urllib3                   == 1.26.17
 vboxapi                   == 1.0
 vboxapi                   == 1.0
@@ -115,3 +115,8 @@ yarl                      == 1.9.2
 youtube-dl                == 2021.12.17
 zope.event                == 5.0
 zope.interface            == 6.1
+python-nmap               == 0.7.1
+python-whois              == 0.8.0
+plotly                    == 5.18.0
+fpdf                      == 1.7.2
+kaleido                   == 0.2.1
