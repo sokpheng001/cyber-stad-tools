@@ -9,7 +9,11 @@ init(autoreset=True)
 def get_cpu_usage():
     return psutil.cpu_percent(interval=0.01)
 
-def loading_animation():
+def loading_animation(content=None):
+    if content is None:
+        content = "Starting tool"
+    else:
+        content=content;
     opening_text = "Opening"
     loading_text = "Loading"
     width = 40  # Width of the progress bar
@@ -17,7 +21,7 @@ def loading_animation():
         progress = i / width
         block = "█" * int(width * progress)
         spaces = " " * (width - int(width * progress))
-        sys.stdout.write("\r" + Fore.GREEN + "[+] Starting tool: [" + block + spaces + "] {:.0%}".format(progress))
+        sys.stdout.write("\r" + Fore.RED + f"[+] {content}: [" + block + spaces + "] {:.0%}".format(progress))
         sys.stdout.flush()
 
         # Adjust sleep duration based on CPU usage
