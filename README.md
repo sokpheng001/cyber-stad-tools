@@ -1,5 +1,4 @@
 # cyber-stad-tools
-<img width="730" alt="image" src="https://github.com/sokpheng001/cyber-stad-tools/assets/126130178/a8c4a4af-00aa-49f9-8064-6f6c1efb3f8c">
 
 <img width="730" alt="image" src="https://github.com/sokpheng001/cyber-stad-tools/assets/126130178/6f9b593f-697e-40cd-8c2c-907df51bae83">
 
