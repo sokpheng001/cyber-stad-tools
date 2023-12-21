@@ -1,5 +1,5 @@
 from components import clear_screen;
-from components import banner,cstad_banner;
+from components import banner,cstad_banner, report_banner;
 
 
 def start():
@@ -9,3 +9,7 @@ def start():
 def cstad_banner_():
     clear_screen.clear_screen();
     cstad_banner.start_banner();
+
+def report_banner_():
+    clear_screen.clear_screen();
+    report_banner.start_banner()

@@ -2,6 +2,13 @@ from pathlib import Path
 from fpdf import FPDF
 from datetime import datetime
 import matplotlib.pyplot as plt
+import subprocess
+import os
+
+import uuid
+
+# Generate a random UUID (UUID4)
+random_uuid = uuid.uuid4()
 
 # Get the current local date and time
 current_date_time = datetime.now()
@@ -26,126 +33,139 @@ structure names are dangerous. This is a common issue in report-writing software
 
 
 def generate_pie_chart(data, labels, colors):
-    # Create a pie chart using matplotlib
-    plt.pie(data, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
-    plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle
-    plt.title("Severity Pie Chart")
-
-    # Save the pie chart as an image
-    image_path = 'pie_chart.png'
-    plt.savefig(image_path, format='png')
-    plt.close()
-    return image_path
+    try:
+         # Create a pie chart using matplotlib
+        plt.pie(data, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
+        plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle
+        plt.title("Severity Pie Chart")
+    
+        # Save the pie chart as an image
+        image_path = 'pie_chart.png'
+        plt.savefig(image_path, format='png')
+        plt.close()
+        return image_path
+    except Exception as error:
+        print(f"Error: {error}")
 
 
 def generate_bar_chart_image(categories, values, colors):
-    plt.bar(categories, values, color=colors)
-    plt.xlabel('Severity')
-    plt.ylabel('Number of vulnerabilities')
-    plt.title('Severity Bar Chart')
-    output_path = "bar.png"
-    # Save the bar chart as an image
-    plt.savefig(output_path, format='png')
-    plt.close()
-    return output_path
+    try:
+        plt.bar(categories, values, color=colors)
+        plt.xlabel('Severity')
+        plt.ylabel('Number of vulnerabilities')
+        plt.title('Severity Bar Chart')
+        output_path = "bar.png"
+        # Save the bar chart as an image
+        plt.savefig(output_path, format='png')
+        plt.close()
+        return output_path
+    except Exception as error:
+        print(f"Error: {error}")
 
 
 def customer_contact_detail(pdf=pdf0):
-    # Add content below the centered image
-    pdf.set_y(40)  # Adjust the y-coordinate as needed
-    pdf.set_font('Arial', 'B', 25)
-    pdf.cell(0, 10, 'Pen-testing report', 0, 1, 'C')
-    # Customer details
-    # Define the table headers and data
-    pdf.set_y(75)  # Adjust the y-coordinate as needed
-    headers = ["From Pen-tester", "To Target"]
-    data = [
-        ["""
-                        [CSTAD]
-                        """, "Foodie shop"]
-    ]
-
-    # Calculate column widths based on available width
-    available_width = pdf.w - pdf.l_margin - pdf.r_margin
-    col_widths = [available_width / len(headers)] * len(headers)
-
-    # Add table headers
-    pdf.set_font("Arial", "B", 12)
-    pdf.set_text_color(255, 0, 0)  # Red color
-    for header, width in zip(headers, col_widths):
-        pdf.cell(width, 10, header, border=1, align="C")
-        # pdf.multi_cell(0, 10, '562 Boeng Kork I,\nToul Kok,\nPhnom Penh',border=1)
-    pdf.ln()
-
-    # Add table data
-    pdf.set_font("Arial", "", 10)
-    pdf.set_text_color(0, 0, 0)  # Reset color
-    for row in data:
-        for cell, width in zip(row, col_widths):
-            pdf.cell(width, 10, cell, border=1, align="C")
+    try:
+            # Add content below the centered image
+        pdf.set_y(40)  # Adjust the y-coordinate as needed
+        pdf.set_font('Arial', 'B', 25)
+        pdf.cell(0, 10, 'Pen-testing report', 0, 1, 'C')
+        # Customer details
+        # Define the table headers and data
+        pdf.set_y(75)  # Adjust the y-coordinate as needed
+        headers = ["From Pen-tester", "To Target"]
+        data = [
+            ["""
+                            [CSTAD]
+                            """, "Foodie shop"]
+        ]
+    
+        # Calculate column widths based on available width
+        available_width = pdf.w - pdf.l_margin - pdf.r_margin
+        col_widths = [available_width / len(headers)] * len(headers)
+    
+        # Add table headers
+        pdf.set_font("Arial", "B", 12)
+        pdf.set_text_color(255, 0, 0)  # Red color
+        for header, width in zip(headers, col_widths):
+            pdf.cell(width, 10, header, border=1, align="C")
+            # pdf.multi_cell(0, 10, '562 Boeng Kork I,\nToul Kok,\nPhnom Penh',border=1)
         pdf.ln()
-    # Set font for the Table of Contents
-
-    # pdf.add_page()
-
-    pdf.ln(5)
-    #
-    pdf.set_left_margin(20)
-    pdf.set_right_margin(20)
-
-
+    
+        # Add table data
+        pdf.set_font("Arial", "", 10)
+        pdf.set_text_color(0, 0, 0)  # Reset color
+        for row in data:
+            for cell, width in zip(row, col_widths):
+                pdf.cell(width, 10, cell, border=1, align="C")
+            pdf.ln()
+        # Set font for the Table of Contents
+    
+        # pdf.add_page()
+    
+        pdf.ln(5)
+        #
+        pdf.set_left_margin(20)
+        pdf.set_right_margin(20)
+    except Exception as error:
+        print(f"Error: {error}")
+    
+    
 def content_table(pdf=pdf0):
-    pdf.set_font("Arial", "B", 12)
-    pdf.set_text_color(255, 0, 0)  # Red color
-
-    # Add "Table of Contents" text
-    pdf.cell(0, 10, "Table of Contents", ln=1)
-
-    # Reset font to default
-    pdf.set_font("Arial", "", 10)
-    pdf.set_text_color(0, 0, 0)  # Reset color
-
-    # Add the content for Table of Contents
-    toc_content = [
-        "Executive Summary "
-        ".............................................................................."
-        "................................................. 3",
-        "1 Engagement "
-        "Summary..................................................."
-        "....................................................... 4",
-        "1.1 "
-        "Scope..........................................................."
-        "............................................................................... 4",
-        "1.2 Risk "
-        "Ratings"
-        "................................................................."
-        "................................................................... 4",
-        "1.3 Findings "
-        "Overview"
-        "....................................................."
-        "............................................................................. 5",
-        "2 Technical "
-        "Details"
-        "......................................................"
-        ""
-        "............................................................................. 6",
-        "2.1 SQL Injection "
-        ".................................................."
-        "................................................................................. 6",
-        "2.2 Cross-site Request Forgery "
-        "........................................................................... 7",
-        "2.3 Information Disclosure "
-        ".................................................."
-        "............................................................................... 8"
-    ]
-    # Add the Table of Contents to the PDF
-    for content in toc_content:
-        pdf.ln(3)
-        pdf.multi_cell(0, 5, content, align="L")
-
+    try:
+        pdf.set_font("Arial", "B", 12)
+        pdf.set_text_color(255, 0, 0)  # Red color
+    
+        # Add "Table of Contents" text
+        pdf.cell(0, 10, "Table of Contents", ln=1)
+    
+        # Reset font to default
+        pdf.set_font("Arial", "", 10)
+        pdf.set_text_color(0, 0, 0)  # Reset color
+    
+        # Add the content for Table of Contents
+        toc_content = [
+            "Executive Summary "
+            ".............................................................................."
+            "................................................. 3",
+            "1 Engagement "
+            "Summary..................................................."
+            "....................................................... 4",
+            "1.1 "
+            "Scope..........................................................."
+            "............................................................................... 4",
+            "1.2 Risk "
+            "Ratings"
+            "................................................................."
+            "................................................................... 4",
+            "1.3 Findings "
+            "Overview"
+            "....................................................."
+            "............................................................................. 5",
+            "2 Technical "
+            "Details"
+            "......................................................"
+            ""
+            "............................................................................. 6",
+            "2.1 SQL Injection "
+            ".................................................."
+            "................................................................................. 6",
+            "2.2 Cross-site Request Forgery "
+            "........................................................................... 7",
+            "2.3 Information Disclosure "
+            ".................................................."
+            "............................................................................... 8"
+        ]
+        # Add the Table of Contents to the PDF
+        for content in toc_content:
+            pdf.ln(3)
+            pdf.multi_cell(0, 5, content, align="L")
+    except Exception as error:
+        print(f"Error: {error}")
+    
 
 def section_content(pdf=pdf0):
-    sections = [
+    try:
+        sections = [
         ("Confidentiality", [
             "This document contains sensitive and confidential information, it should not be shared with any "
             "other 3rd parties without written permission."]),
@@ -160,78 +180,84 @@ def section_content(pdf=pdf0):
             "The author(s) reserve the right to modify these terms. Review this document periodically for "
             "updates."]),
         ("Contact", ["For inquiries, contact:(+855) 875-248-05"])
-    ]
+        ]
 
-    # Add text after Table of Contents
-    pdf.add_page()
-
-    pdf.ln(20)
-    pdf.set_font("Arial", "B", 16)
-    pdf.set_text_color(255, 0, 0)  # Red color
-    pdf.cell(0, 10, "Legal", ln=1)
-
-    # Loop through each section
-    for heading, detail in sections:
-        # Set font for heading
-        pdf.set_font("Arial", "B", 12)
+        # Add text after Table of Contents
+        pdf.add_page()
+    
+        pdf.ln(20)
+        pdf.set_font("Arial", "B", 16)
         pdf.set_text_color(255, 0, 0)  # Red color
-
-        # Add heading text
-        pdf.cell(0, 10, heading, ln=1)
-
-        # Reset font to default
-        pdf.set_font("Arial", "", 10)
-        pdf.set_text_color(0, 0, 0)  # Reset color
-
-        # Add content for the section
-        for paragraph in detail:
-            pdf.multi_cell(0, 5, paragraph, align="L")
-            pdf.ln(3)
-
-    pdf.set_left_margin(20)
-    pdf.set_right_margin(20)
-
+        pdf.cell(0, 10, "Legal", ln=1)
+    
+        # Loop through each section
+        for heading, detail in sections:
+            # Set font for heading
+            pdf.set_font("Arial", "B", 12)
+            pdf.set_text_color(255, 0, 0)  # Red color
+    
+            # Add heading text
+            pdf.cell(0, 10, heading, ln=1)
+    
+            # Reset font to default
+            pdf.set_font("Arial", "", 10)
+            pdf.set_text_color(0, 0, 0)  # Reset color
+    
+            # Add content for the section
+            for paragraph in detail:
+                pdf.multi_cell(0, 5, paragraph, align="L")
+                pdf.ln(3)
+    
+        pdf.set_left_margin(20)
+        pdf.set_right_margin(20)
+    except Exception as error:
+        print(f"Error: {error}")
+    
 
 def change_log(pdf=pdf0):
-    pdf.set_font("Arial", "B", 12)
-    pdf.set_text_color(255, 0, 0)  # Red color
-    pdf.cell(0, 10, "Change Log", ln=1)
-    pdf.ln(1)  # Add space
-    pdf.set_font("Arial", "", 10)
-    pdf.set_text_color(0, 0, 0)  # Reset color
-
-    # Define the table headers and data
-    headers = ["Date", "Version", "Comments"]
-    data = [
-        ["1/12/2023", "0.1", "Initial Report"],
-        ["2/12/2023", "0.2", "Recon Stage"],
-        ["20/12/2023", "0.3", "Finalizing Stage"]
-    ]
-    # Calculate column widths based on available width
-    available_width = pdf.w - pdf.l_margin - pdf.r_margin
-    col_widths = [available_width / len(headers)] * len(headers)
-
-    # Add table headers
-    pdf.set_font("Arial", "B", 12)
-    pdf.set_text_color(255, 0, 0)  # Red color
-    for header, width in zip(headers, col_widths):
-        pdf.cell(width, 10, header, border=1, align="C")
-    pdf.ln()
-
-    # Add table data
-    pdf.set_font("Arial", "", 10)
-    pdf.set_text_color(0, 0, 0)  # Reset color
-    for row in data:
-        for cell, width in zip(row, col_widths):
-            pdf.cell(width, 10, cell, border=1, align="C")
+    try:
+        pdf.set_font("Arial", "B", 12)
+        pdf.set_text_color(255, 0, 0)  # Red color
+        pdf.cell(0, 10, "Change Log", ln=1)
+        pdf.ln(1)  # Add space
+        pdf.set_font("Arial", "", 10)
+        pdf.set_text_color(0, 0, 0)  # Reset color
+    
+        # Define the table headers and data
+        headers = ["Date", "Version", "Comments"]
+        data = [
+            ["1/12/2023", "0.1", "Initial Report"],
+            ["2/12/2023", "0.2", "Recon Stage"],
+            ["20/12/2023", "0.3", "Finalizing Stage"]
+        ]
+        # Calculate column widths based on available width
+        available_width = pdf.w - pdf.l_margin - pdf.r_margin
+        col_widths = [available_width / len(headers)] * len(headers)
+    
+        # Add table headers
+        pdf.set_font("Arial", "B", 12)
+        pdf.set_text_color(255, 0, 0)  # Red color
+        for header, width in zip(headers, col_widths):
+            pdf.cell(width, 10, header, border=1, align="C")
         pdf.ln()
-    # # Add text after images
-    pdf.add_page()
-    pdf.ln(20)
-
+    
+        # Add table data
+        pdf.set_font("Arial", "", 10)
+        pdf.set_text_color(0, 0, 0)  # Reset color
+        for row in data:
+            for cell, width in zip(row, col_widths):
+                pdf.cell(width, 10, cell, border=1, align="C")
+            pdf.ln()
+        # # Add text after images
+        pdf.add_page()
+        pdf.ln(20)
+    except Exception as error:
+        print(f"Error: {error}")
+    
 
 def executive_summary(pdf=pdf0):
-    diagram_file = "flow1.png"
+    # diagram_file = "flow1.png"
+    diagram_file = "D:\\Multi-programming_languages\\Python\\CYBER-STAD tool for final project\\cyber_stad_tool_v1\\view\generate_reports\\flow1.png"
     # Set font to bold and red
     pdf.set_font("Arial", "B", 12)
     pdf.set_text_color(255, 0, 0)  # Red color
@@ -480,6 +506,8 @@ def way_to_mitigate_sql_injection(pdf=pdf0, content=mitigate_sql_injection):
                    content)
 
 
+
+
 class Report:
     pdf = FPDF("P", "mm", "A4")
 
@@ -489,14 +517,16 @@ class Report:
         self.output_path.mkdir(parents=True, exist_ok=True)
 
     def generate_report(self, pdf=pdf):
-        file_name = "report.pdf"
+        file_name = "CSTAD_Pen_testing_report.pdf"
+        # file_name = str(random_uuid) + ".pdf"
         if self.data == '':  # false
             print("No data available to generate a report, start exploit first.")
         else:
-            print(f"[+] Generating report ---> {file_name} ...")
+            print(f"[+] Generated report ---> {file_name} ...")
 
             # Specify the file names for header and content images
-            header_file = "CSTAD.png"
+            # header_file = "CSTAD.png"
+            header_file = "D:\\Multi-programming_languages\\Python\\CYBER-STAD tool for final project\\cyber_stad_tool_v1\\view\\generate_reports\\CSTAD.png"
             # pdf = FPDF("P", "mm", "A4")
             pdf.add_page()
             # add header image (will be code it later, but let me put the screen short first)
@@ -583,6 +613,11 @@ class Report:
             way_to_mitigate_sql_injection(pdf=pdf)
 
             pdf.output(str(self.output_path / file_name), "F")
-            location = """file:///D:/Multi-programming_languages/Python/CYBER-STAD%20tool%20for%20final%20project/cyber_stad_tool_v1/view/generate_reports/output/report.pdf"""
+            location = f"""file:///D:/Multi-programming_languages/Python/CYBER-STAD%20tool%20for%20final%20project/cyber_stad_tool_v1/view/generate_reports/output/{file_name}"""
+            try:
+                subprocess.run(["start","",location], shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            except subprocess.CalledProcessError as e:
+                print(f"Failed to start: {e}")
             print(f"=> File Pen-testing reported: {location}")
+
 

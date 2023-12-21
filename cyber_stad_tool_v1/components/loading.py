@@ -21,7 +21,7 @@ def loading_animation(content=None):
         progress = i / width
         block = "█" * int(width * progress)
         spaces = " " * (width - int(width * progress))
-        sys.stdout.write("\r" + Fore.GREEN + f"[+] {content}: [" + block + spaces + "] {:.0%}".format(progress))
+        sys.stdout.write("\r" + Fore.RED + f"[+] {content}: [" + block + spaces + "] {:.0%}".format(progress))
         sys.stdout.flush()
 
         # Adjust sleep duration based on CPU usage

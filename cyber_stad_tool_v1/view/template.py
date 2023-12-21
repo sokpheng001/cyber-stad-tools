@@ -4,11 +4,12 @@ from view.exploit_options import exploit_option
 from view.generate_reports import generate_report
 import sys
 from components import clear_screen_and_provide_with_banner, clear_screen, exit_message, invalid_input_option_message, \
-    banner, loading;
+    banner, loading, report_log;
 from datetime import datetime
 from view.reconnaissance_options import reconnaissance_option;
 from view.reconnaissance_options import option
 from view.generate_reports.generate_report import Report
+import time
 
 
 
@@ -109,6 +110,12 @@ class Template(exploit_option.Exploit, reconnaissance_option.Reconnaissance, gen
                 self.exploit_option();
             # report is here
             elif opt == "8":
+                print("[+] Starting generating report...")
+                time.sleep(1)
+                clear_screen_and_provide_with_banner.report_banner_()
+                time.sleep(1)
+                report_log.start_log();
+                print("================================================================")
                 report = Report()
                 report.generate_report();
 
